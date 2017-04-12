@@ -1,7 +1,7 @@
 # Created by pbr
 AUTHORS
 ChangeLog
-pbr*.egg
+*.egg*
 dist
 # Test files
 .tox
