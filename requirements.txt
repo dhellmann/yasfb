@@ -1,3 +1,2 @@
 Sphinx>=0.6
-feedformatter
 pyquery

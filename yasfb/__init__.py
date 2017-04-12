@@ -7,11 +7,11 @@ import os.path
 import subprocess
 import time
 
-from feedformatter import Feed
 import pyquery
-
 from sphinx.application import ENV_PICKLE_FILENAME
 from sphinx.util.console import bold
+
+from yasfb.formatter import Feed
 
 
 def setup(app):
@@ -127,7 +127,7 @@ def create_feed_item(app, pagename, templatename, ctx, doctree):
 
 
 def emit_feed(app, exc):
-    ordered_items = app.builder.env.feed_items.values()
+    ordered_items = list(app.builder.env.feed_items.values())
     feed = app.builder.env.feed_feed
     ordered_items.sort(
         key=lambda x: x['pubDate'],
