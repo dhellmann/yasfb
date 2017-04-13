@@ -1,3 +1,4 @@
+# Copied from https://github.com/lmaurits/feedformatter
 # Copyright (c) 2008, Luke Maurits <luke@maurits.id.au>
 # All rights reserved.
 #
