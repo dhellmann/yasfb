@@ -447,9 +447,8 @@ class Feed(object):
         """Format the feed as RSS 2.0 and save the result to a file."""
 
         string = self.format_rss2_string(validate, pretty)
-        handle = open(filename, "w")
-        handle.write(string)
-        handle.close()
+        with open(filename, "w") as handle:
+            handle.write(string.encode('utf-8'))
 
     def validate_atom(self):
         """Raise an InvalidFeedException if the feed cannot be validly
