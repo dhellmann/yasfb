@@ -70,6 +70,9 @@ def _get_last_updated(app, pagename):
         # value to the entire site.
         src_file = app.builder.env.doc2path(pagename)
         if os.path.exists(src_file):
+            # Get the real path of any symlinks, otherwise git won't have
+            # a log and no last_update can be found.
+            src_file = os.path.realpath(src_file)
             try:
                 last_updated_t = subprocess.check_output(
                     [
