@@ -4,6 +4,7 @@
 # http://bitbucket.org/birkenfeld/sphinx-contrib/src/tip/feed/
 
 import os.path
+import pickle
 import subprocess
 import time
 
@@ -132,7 +133,9 @@ def emit_feed(app, exc):
     # save the environment
     builder = app.builder
     LOG.info(bold('pickling environment... '), nonl=True)
-    builder.env.topickle(os.path.join(builder.doctreedir, ENV_PICKLE_FILENAME))
+    pickle_path = os.path.join(builder.doctreedir, ENV_PICKLE_FILENAME)
+    with open(pickle_path, 'wb') as f:
+        pickle.dump(builder.env, f)
     LOG.info('done')
 
     # global actions
