@@ -10,8 +10,11 @@ import time
 import pyquery
 from sphinx.application import ENV_PICKLE_FILENAME
 from sphinx.util.console import bold
+from sphinx.util import logging
 
 from yasfb.formatter import Feed
+
+LOG = logging.getLogger(__name__)
 
 
 def setup(app):
@@ -145,11 +148,11 @@ def emit_feed(app, exc):
 
     # save the environment
     builder = app.builder
-    builder.info(bold('pickling environment... '), nonl=True)
+    LOG.info(bold('pickling environment... '), nonl=True)
     builder.env.topickle(os.path.join(builder.doctreedir, ENV_PICKLE_FILENAME))
-    builder.info('done')
+    LOG.info('done')
 
     # global actions
-    builder.info(bold('checking consistency... '), nonl=True)
+    LOG.info(bold('checking consistency... '), nonl=True)
     builder.env.check_consistency()
-    builder.info('done')
+    LOG.info('done')
