@@ -17,23 +17,6 @@ from yasfb.formatter import Feed
 LOG = logging.getLogger(__name__)
 
 
-def setup(app):
-    """ see: http://sphinx.pocoo.org/ext/appapi.html
-        this is the primary extension point for Sphinx
-    """
-    from sphinx.application import Sphinx
-    if not isinstance(app, Sphinx):
-        return
-    app.add_config_value('feed_base_url', '', '')
-    app.add_config_value('feed_description', '', '')
-    app.add_config_value('feed_author', '', '')
-    app.add_config_value('feed_filename', 'rss.xml', 'html')
-
-    app.connect('html-page-context', create_feed_item)
-    app.connect('build-finished', emit_feed)
-    app.connect('builder-inited', create_feed_container)
-
-
 def create_feed_container(app):
     feed = Feed()
     feed.feed['title'] = app.config.project
@@ -156,3 +139,14 @@ def emit_feed(app, exc):
     LOG.info(bold('checking consistency... '), nonl=True)
     builder.env.check_consistency()
     LOG.info('done')
+
+
+def setup(app):
+    app.add_config_value('feed_base_url', '', '')
+    app.add_config_value('feed_description', '', '')
+    app.add_config_value('feed_author', '', '')
+    app.add_config_value('feed_filename', 'rss.xml', 'html')
+
+    app.connect('html-page-context', create_feed_item)
+    app.connect('build-finished', emit_feed)
+    app.connect('builder-inited', create_feed_container)
