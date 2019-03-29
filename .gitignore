@@ -1,7 +1,13 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Created by pbr
 AUTHORS
 ChangeLog
 *.egg*
 dist
+
 # Test files
 .tox
